@@ -1,0 +1,15 @@
+# py -m venv venv
+# py -m pip install -r requirements.txt
+# pip uninstall library
+
+fastapi==0.70.0
+uvicorn==0.15.0
+# aiofiles
+# aiosqlite>=0.17.0
+# python-multipart
+# sqlalchemy==1.4.27
+# progressbar2
+# python-dateutil
+# passlib
+# dependency_injector 
+
