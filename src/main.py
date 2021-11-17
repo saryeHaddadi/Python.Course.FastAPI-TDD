@@ -1,25 +1,19 @@
 import uvicorn
-from fastapi import FastAPI, Depends
-
-from config import get_settings, Settings
-
-app = FastAPI()
+from web.Configuration import Configuration
+from web.ApplicationBuilder import ApplicationBuilder
 
 
-@app.get("/ping")
-async def pong(settings: Settings = Depends(get_settings)):
-    return {
-        "ping": "pong!",
-        "environment": settings.environment,
-        "testing": settings.testing
-    }
 
+def build_app(configuration: Configuration = Configuration.get_default()):
+    return ApplicationBuilder(configuration).build()
 
 def main():
-    uvicorn.run("main:app", host='127.0.0.1', port=8000, reload=True)
+    uvicorn.run('main:build_app', factory=True, host='127.0.0.1', port=8000, reload=True)
+
 
 if __name__ == '__main__':
     main()
+
 
 
 
