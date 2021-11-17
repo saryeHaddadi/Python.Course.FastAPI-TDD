@@ -1,17 +1,8 @@
 import os
-from typing import Optional
 from pydantic import BaseSettings, AnyUrl
 
-
 class Configuration(BaseSettings):
-    environment: str
-    testing: bool
-    database_url: Optional[AnyUrl]
+    environment: str = os.getenv("ENVIRONMENT", "dev")
+    testing: bool = os.getenv("TESTING", 0)
+    database_url: AnyUrl = os.getenv("DATABASE_URL")
 
-    @classmethod
-    def get_default(self):
-        return Configuration(
-            environment = os.getenv("ENVIRONMENT", "dev"),
-            testing = os.getenv("TESTING", 0),
-            database_url = os.getenv("DATABASE_URL")
-        )

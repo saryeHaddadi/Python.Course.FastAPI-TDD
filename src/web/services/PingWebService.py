@@ -1,15 +1,13 @@
-from web.Configuration import Configuration
-from classy_fastapi import Routable, get
+from web.services.base.BaseWebService import BaseWebService
+from classy_fastapi import get
 
-class PingWebService(Routable):
+class PingWebService(BaseWebService):
     
-    def __init__(self, configuration: Configuration) -> None:
-        super().__init__()
-        self.configuration = configuration
+    def __init__(self, configuration: BaseWebService):
+        super().__init__(configuration)
     
     @get("/ping")
     async def pong(self):
-        print('a')
         return {
             "ping": "pong!",
             "environment": self.configuration.environment,

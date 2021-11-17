@@ -1,15 +1,15 @@
-import fastapi
+from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from web.services.PingWebService import PingWebService
 from web.Configuration import Configuration
 
 class ApplicationBuilder:
     def __init__(self, configuration: Configuration):
-        self.app = fastapi.FastAPI()
+        self.app: FastAPI = None
         self.configuration = configuration
     
     def build(self):
-        self.app = fastapi.FastAPI()
+        self.app = FastAPI()
         self.configure()
         return self.app
      
